@@ -67,7 +67,7 @@ public class CatControllerTest {
 				.accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		assertEquals(HttpStatus.NOT_IMPLEMENTED, result.getResponse().getStatus());
+		assertEquals(HttpStatus.NOT_IMPLEMENTED.value(), result.getResponse().getStatus());
 
 	}
 
