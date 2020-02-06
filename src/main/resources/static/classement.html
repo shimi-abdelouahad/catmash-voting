@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>catmash</title>
+        <style>
+            h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+            h2 {
+                font-size: 20px;
+                text-align: center;
+            }
+            img.img-cat {
+                max-height: 150px;
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            table thead th {
+                height: 50px
+            }
+            th, td {
+                padding: 5px;
+            }
+            td.pos {
+                width: 30px;
+            }
+            td.votes {
+                width: 50px;
+                text-align: center;
+            }
+        </style>
+        <script src="jquery-3.4.1.min.js"></script>
+        <script language="JavaScript">
+            $(document).ready(
+                function() {
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: "/cats/catsAllScore",
+                        success: function (cats) {
+                            for (var i = 0; i < cats.length; i++) {
+                                var row = document.createElement("tr");
+                                var position = document.createElement("td");
+                                position.innerHTML = i + 1;
+                                position.className = "pos";
+                                row.append(position);
+
+                                var cat = document.createElement("td");
+                                cat.className = "cat";
+                                cat.innerHTML = "<img class='img-cat' src='" + cats[i].url + "'>";
+                                row.append(cat);
+
+                                var score = document.createElement("td");
+                                score.className = "votes";
+                                score.innerHTML = cats[i].score;
+                                row.append(score);
+
+                                $("#tableau").append(row);
+                            }
+                        },
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Accept", "Application/json")
+                        }
+                    });
+                }
+            )
+        </script>
+    </head>
+
+    <body>
+        <h1>Classement</h1>
+        <a href="/"><h2>retour votes</h2></a>
+        <p />
+        <table id="tableau">
+            <thead>
+                <tr>
+                    <th class="pos">#</th>
+                    <th class="cat">Chat</th>
+                    <th class="votes">Votes</th>
+                </tr>
+            </thead>
+        </table>
+    </body>
+</html>

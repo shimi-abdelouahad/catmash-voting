@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Catmash voting</title>
+        <style>
+            h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+            h2 {
+                font-size: 20px;
+                text-align: center;
+            }
+            div.panel-left {
+                width: 45%;
+                float: right;
+                margin: 0 auto;
+            }
+            div.panel-right {
+                width: 45%;
+                float: right;
+                margin: 0 auto;
+            }
+            img.img-cat {
+                max-width: 80%;
+            }
+        </style>
+        <script src="jquery-3.4.1.min.js"></script>
+        <script language="JavaScript">
+            $(document).ready(
+                function() {
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: "/cats/catsUXFaceMash",
+                        success: function (catsUXF) {
+                            $("#cat1").attr('src', catsUXF.first.url);
+                            $("#cat1").click(function () {
+                            	data={"id": catsUXF.first.id,
+                            		   "url": catsUXF.first.url};
+                                $.post({
+                                    url: "/cat/vote",
+                                    data: JSON.stringify(data),
+                                    contentType: "application/json",
+                                    success: function() {location.reload()}
+                                })
+                            });
+                            $("#cat2").attr('src', catsUXF.seconde.url);
+                            $("#cat2").click(function () {
+                            	data={"id": catsUXF.seconde.id,
+                         		   "url": catsUXF.seconde.url};
+                                $.post({
+                                    url: "/cat/vote",
+                                    data: JSON.stringify(data),
+                                    contentType: "application/json",
+                                    success: function() {location.reload()}
+                                })
+                            });
+                        },
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Accept", "Application/json")
+                        }
+                    });
+                }
+            )
+        </script>
+    </head>
+
+    <body>
+        <h1>Quel chat est le plus mignon ?</h1>
+        <a href="classement.html"><h2>Classement</h2></a>
+        <p />
+        <div class="panel-left"><img id="cat1" class="img-cat" src="" /></div>
+        <div class="panel-right"><img id="cat2" class="img-cat" src="" /></div>
+    </body>
+</html>
