@@ -6,12 +6,12 @@ import com.catmash.voting.data.entity.Cat;
 
 public interface CatService {
 
-	void save(List<Cat> cats);
+	void save(List<Cat> cats) throws Exception;
 
-	List<Cat> findCatUXFaceMash();
+	List<Cat> findCatUXFaceMash() throws Exception;
 
-	Iterable<Cat> findAll();
+	Iterable<Cat> findAll() throws Exception;
 
-	void vote(String idVotedCat);
+	void vote(String idVotedCat) throws Exception;
 
 }

@@ -42,7 +42,7 @@
                     $.ajax({
                         dataType: "json",
                         type: "GET",
-                        url: "/cats/catsAllScore",
+                        url: "/cats",
                         success: function (cats) {
                             for (var i = 0; i < cats.length; i++) {
                                 var row = document.createElement("tr");

@@ -15,23 +15,23 @@ public class CatServiceImpl implements CatService {
 	CatRepository catRepository;
 
 	@Override
-	public void save(List<Cat> cats) {
+	public void save(List<Cat> cats) throws Exception {
 		catRepository.saveAll(cats);
 	}
 
 	@Override
-	public List<Cat> findCatUXFaceMash() {
+	public List<Cat> findCatUXFaceMash() throws Exception {
 		return catRepository.findCatUXFaceMash();
 	}
 
 	@Override
-	public Iterable<Cat> findAll() {
+	public Iterable<Cat> findAll() throws Exception {
 		return catRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public void vote(String idVotedCat) {
+	public void vote(String idVotedCat) throws Exception {
 		Cat cat = catRepository.findById(idVotedCat);
 		cat.setScore(cat.getScore() + 1);
 		catRepository.save(cat);

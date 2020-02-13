@@ -28,14 +28,14 @@ public class CatServiceTest {
 	CatRepository repository;
 
 	@Test
-	public void findCatUXFaceMashTest() {
+	public void findCatUXFaceMashTest() throws Exception {
 		List<Cat> findCatUXFaceMash = catService.findCatUXFaceMash();
 		assertNotNull(findCatUXFaceMash);
 		assertEquals(2, findCatUXFaceMash.size(), " UX face mash should have 2 elements");
 	}
 
 	@Test
-	public void voteTest() {
+	public void voteTest() throws Exception {
 		String catId = "c8a";
 		Cat catBeforeVote = repository.findById(catId);
 		catService.vote(catId);
@@ -44,11 +44,11 @@ public class CatServiceTest {
 	}
 
 	@Test
-	public void testJsonDataLoad() {
+	public void testJsonDataLoad() throws Exception {
 		Iterable<Cat> findAll = catService.findAll();
 		assertNotNull("should be not null", findAll);
 		long nbCat = StreamSupport.stream(findAll.spliterator(), false).count();
-		assertTrue(nbCat >= 100, " should be equals to nb element of cat in file data/cats.json");
+		assertTrue(nbCat >= 100, " should be at less equals to nb element of cat in file data/cats.json");
 	}
 
 }

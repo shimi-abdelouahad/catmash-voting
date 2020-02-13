@@ -31,14 +31,14 @@
                     $.ajax({
                         dataType: "json",
                         type: "GET",
-                        url: "/cats/catsUXFaceMash",
+                        url: "/votes/generate",
                         success: function (catsUXF) {
                             $("#cat1").attr('src', catsUXF.first.url);
                             $("#cat1").click(function () {
                             	data={"id": catsUXF.first.id,
                             		   "url": catsUXF.first.url};
                                 $.post({
-                                    url: "/cat/vote",
+                                    url: "/votes",
                                     data: JSON.stringify(data),
                                     contentType: "application/json",
                                     success: function() {location.reload()}
@@ -49,7 +49,7 @@
                             	data={"id": catsUXF.seconde.id,
                          		   "url": catsUXF.seconde.url};
                                 $.post({
-                                    url: "/cat/vote",
+                                    url: "/votes",
                                     data: JSON.stringify(data),
                                     contentType: "application/json",
                                     success: function() {location.reload()}
